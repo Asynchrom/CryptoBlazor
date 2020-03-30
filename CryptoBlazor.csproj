@@ -4,4 +4,19 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Google.Cloud.Firestore" Version="2.0.0-beta02" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\historyPrices.cs" />
+    <Compile Remove="Controller.cs" />
+    <Compile Remove="Pages\CryptoData.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\CryptoData.cshtml" />
+  </ItemGroup>
+
 </Project>

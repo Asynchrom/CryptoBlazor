@@ -1,7 +1,9 @@
 ﻿@page "/fetchdata"
 
+@using System.Security.Cryptography
 @using CryptoBlazor.Data
 @inject WeatherForecastService ForecastService
+@inject DataAccess Database
 
 <h1>Weather forecast</h1>
 
@@ -15,32 +17,72 @@ else
 {
     <table class="table">
         <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
+        <tr>
+            <th>Date</th>
+            <th>Temp. (C)</th>
+            <th>Temp. (F)</th>
+            <th>Summary</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
+        @foreach (var forecast in forecasts)
+        {
+            <tr>
+                <td>@forecast.Date.ToShortDateString()</td>
+                <td>@forecast.TemperatureC</td>
+                <td>@forecast.TemperatureF</td>
+                <td>@forecast.Summary</td>
+            </tr>
+        }
         </tbody>
     </table>
+    
+    <button class="btn btn-primary" @onclick="@(() => GetCryptoData("binance-coinHistory"))">
+        Generate crypto data for binance-coin
+    </button>
+    <p>Nemoj stiskat previse, skupo je</p>
+    if (prices != null)
+    {
+        <h2>Binance coin data</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Datetime</th>
+                <th>Market cap</th>
+                <th>Price in USD</th>
+                <th>Price in BTC</th>
+                <th>Volume</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var price in prices.historyPrices)
+            {
+                <tr>
+                    <td>@price.Datetime</td>
+                    <td>@price.MarketCap</td>
+                    <td>@price.PriceUsd</td>
+                    <td>@price.PriceBtc</td>
+                    <td>@price.Volume</td>
+                    <td></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
 }
 
 @code {
     private WeatherForecast[] forecasts;
-
+    private CryptoHistoryPrices prices;
+    
     protected override async Task OnInitializedAsync()
     {
         forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+    }
+
+    protected async Task GetCryptoData(string collectionName)
+    {
+        prices = await Database.GetCryptoData(collectionName);
+        Console.WriteLine(prices.Name);
     }
 }
