@@ -1,0 +1,121 @@
+﻿@page "/converter"
+
+@using System.Security.Cryptography
+@using CryptoBlazor.Data
+@inject WeatherForecastService ForecastService
+@inject DataAccess Database
+
+<h1 style="text-align: center;">Converter</h1>
+
+<div class="container" style="margin-top: 80px;">
+    <div class="row justify-content-center">
+            <div class="col-4">
+                <input type="number" style="width: 100%;" @bind="amount">
+            </div>
+            <div class="col-4"></div>
+        </div>
+</div>
+
+<div class="container" style="margin-top: 20px;">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <select class="form-control" @bind="coin">
+                <option selected disabled value="-1">Choose one coin</option>
+                <option value="bitcoinHistory Bitcoin (BTC)">Bitcoin (BTC)</option>
+                <option value="etherumHistory Etherum (ETH)">Etherum (ETH)</option>
+                <option value="tetherHistory Tether (USDT)">Tether (USDT)</option>
+                <option value="bitcoin-cashHistory Bitcoin Cash (BCH)">Bitcoin Cash (BCH)</option>
+                <option value="bitcoin-svHistory Bitcoin SV (BSV)">Bitcoin SV (BSV)</option>
+                <option value="litecoinHistory Litecoin (LTC)">Litecoin (LTC)</option>
+                <option value="eosHistory EOS (EOS)">EOS (EOS)</option>
+                <option value="binance-coinHistory Binance Coin (BNB)">Binance Coin (BNB)</option>
+                <option value="tezosHistory Tezos (XTZ)">Tezos (XTZ)</option>
+                <option value="unus-sed-leoHistory UNUS SED LEO (LEO)">UNUS SED LEO (LEO)</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <select class="form-control" @bind="currencyType">
+                <option selected disabled value="-1">Choose one currency</option>
+                <option value="USD">United States Dollar "$" (USD)</option>
+                <option value="BTC">Bitcoin (BTC)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 20px;">
+    <div class="row justify-content-center">
+        <div class="col-1">
+            <button class="btn btn-primary" @onclick="@(() => GetCryptoData(coin))">
+                Convert!
+            </button>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-primary" @onclick="@(() => Reload())">
+                Refresh!
+            </button>
+        </div>
+    </div>
+</div>
+
+@if (prices != null)
+    {
+        if (currencyType == "USD")
+        {
+            @foreach (var price in prices.historyPrices)
+            {
+                if (price.PriceUsd > max)
+                {
+                    max = price.PriceUsd;
+                }
+            }
+        }
+        else
+        {
+            @foreach (var price in prices.historyPrices)
+            {
+                if (price.PriceBtc > max)
+                {
+                    max = price.PriceBtc;
+                }
+            }
+        }
+        total = max * amount;
+        <div class="container" style="margin-top: 20px;">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <p>@amount @coinType: <b>@total @currencyType</b></p>
+                </div>
+            </div>
+        </div>
+    }
+
+
+@code {
+    string coin, currencyType, coinType;
+    private CryptoHistoryPrices prices;
+    double max = 0, total = 0;
+    int amount;
+
+    public void Reload()
+    {
+        coin = currencyType = coinType = "";
+        max = total = 0;
+        amount = 0;
+        prices = null;
+    }
+
+    protected async Task GetCryptoData(string collectionName)
+    {
+        var splitter = collectionName.Split(" ");
+        coinType = "";
+        for (var i = 1; i < splitter.Length; i++)
+            {
+                if (i == (splitter.Length - 1)) coinType += splitter[i];
+                else coinType += splitter[i] + " ";
+            }
+        prices = await Database.GetCryptoData(splitter[0]);
+        Console.WriteLine(prices.Name);
+    }
+}
+
