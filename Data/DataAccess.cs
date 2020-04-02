@@ -13,9 +13,9 @@ namespace CryptoBlazor.Data
         
         public DataAccess()
         {
-            string filepath = "Shared/edu-praktikum-coins-f322d-firebase-adminsdk-a2xcj-34e93fa722.json";
+            string filepath = "Shared/crypt-a0911-firebase-adminsdk-3g6ci-899c02e695.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", filepath);
-            ProjectId = "edu-praktikum-coins-f322d";
+            ProjectId = "crypt-a0911";
             DB = FirestoreDb.Create(ProjectId);
             Console.WriteLine("Created Cloud Firestore client with project ID: {0}", ProjectId);
         }
