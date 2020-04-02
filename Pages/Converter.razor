@@ -22,11 +22,7 @@
             <select class="form-control" @bind="coin">
                 <option selected disabled value="-1">Choose one coin</option>
                 <option value="bitcoinHistory Bitcoin (BTC)">Bitcoin (BTC)</option>
-<<<<<<< HEAD
                 <option value="ethereumHistory Etherum (ETH)">Etherum (ETH)</option>
-=======
-                <option value="etherumHistory Etherum (ETH)">Etherum (ETH)</option>
->>>>>>> 3e8981b67fa7ebd9249bd471cbd55395d1f5c864
                 <option value="tetherHistory Tether (USDT)">Tether (USDT)</option>
                 <option value="bitcoin-cashHistory Bitcoin Cash (BCH)">Bitcoin Cash (BCH)</option>
                 <option value="bitcoin-svHistory Bitcoin SV (BSV)">Bitcoin SV (BSV)</option>
@@ -40,15 +36,10 @@
         <div class="col-4">
             <select class="form-control" @bind="currencyType">
                 <option selected disabled value="-1">Choose one currency</option>
-<<<<<<< HEAD
                 <option value="USD">United States Dollar (USD)</option>
                 <option value="EUR">Euro (EUR)</option>
                 <option value="GBP">Great Britain Pound (GBP)</option>
                 <option value="HRK">Hrvatska kuna (HRK)</option>
-=======
-                <option value="USD">United States Dollar "$" (USD)</option>
-                <option value="BTC">Bitcoin (BTC)</option>
->>>>>>> 3e8981b67fa7ebd9249bd471cbd55395d1f5c864
             </select>
         </div>
     </div>
@@ -70,7 +61,6 @@
 </div>
 
 @if (prices != null)
-<<<<<<< HEAD
 {
     <div class="container" style="margin-top: 20px;">
         <div class="row justify-content-center">
@@ -81,52 +71,10 @@
     </div>
 }
 
-
 @code {
     string coin, currencyType, frontCurrencyType, coinType;
     private CryptoHistoryPrices prices;
-    double max = 0, total = 0;
-    double amount;
-=======
-    {
-        if (currencyType == "USD")
-        {
-            @foreach (var price in prices.historyPrices)
-            {
-                if (price.PriceUsd > max)
-                {
-                    max = price.PriceUsd;
-                }
-            }
-        }
-        else
-        {
-            @foreach (var price in prices.historyPrices)
-            {
-                if (price.PriceBtc > max)
-                {
-                    max = price.PriceBtc;
-                }
-            }
-        }
-        total = max * amount;
-        <div class="container" style="margin-top: 20px;">
-            <div class="row justify-content-center">
-                <div class="col-8">
-                    <p>@amount @coinType: <b>@total @currencyType</b></p>
-                </div>
-            </div>
-        </div>
-    }
-
-
-@code {
-    string coin, currencyType, coinType;
-    private CryptoHistoryPrices prices;
-    double max = 0, total = 0;
-    int amount;
->>>>>>> 3e8981b67fa7ebd9249bd471cbd55395d1f5c864
-
+    double max = 0, total = 0, amount = 0;
     public void Reload()
     {
         coin = currencyType = coinType = "";
@@ -140,7 +88,6 @@
         var splitter = collectionName.Split(" ");
         coinType = "";
         for (var i = 1; i < splitter.Length; i++)
-<<<<<<< HEAD
         {
             if (i == (splitter.Length - 1)) coinType += splitter[i];
             else coinType += splitter[i] + " ";
@@ -155,13 +102,8 @@
         else if (currencyType == "GBP") total = usdPrice * 0.81;
         else if (currencyType == "HRK") total = usdPrice * 7.04;
         frontCurrencyType = currencyType;
-=======
-            {
-                if (i == (splitter.Length - 1)) coinType += splitter[i];
-                else coinType += splitter[i] + " ";
-            }
+  
         prices = await Database.GetCryptoData(splitter[0]);
->>>>>>> 3e8981b67fa7ebd9249bd471cbd55395d1f5c864
         Console.WriteLine(prices.Name);
     }
 }

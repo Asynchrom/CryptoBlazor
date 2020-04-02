@@ -1,5 +1,79 @@
 ﻿@page "/"
+@using CryptoBlazor.Data
+@inject UserService User
+@inject IJSRuntime JSRuntime
 
-<h1>Hello, world!</h1>
+@if (login)
+{
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <br />Login
+            </div>
 
-Welcome to your new app.
+            <!-- Login Form -->
+            <form>
+                <input @bind-value="username" type="text" id="login" class="fadeIn second" name="login" placeholder="username">
+                <input @bind-value="password" type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+                <input @onclick="loginNow" type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+
+            <!-- Change -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#" @onclick="change">Don't have an account?</a>
+            </div>
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <br />Singup
+            </div>
+
+            <!-- Signup Form -->
+            <form>
+                <input @bind-value="email" type="text" id="mail" class="fadeIn first" name="signup" placeholder="email">
+                <input @bind-value="username" type="text" id="username" class="fadeIn second" name="signup" placeholder="username">
+                <input @bind-value="password" type="text" id="password" class="fadeIn third" name="signup" placeholder="password">
+                <input @onclick="signupNow" type="submit" class="fadeIn fourth" value="Sign Up">
+            </form>
+
+            <!-- Change -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#" @onclick="change">Already have an account?</a>
+            </div>
+
+        </div>
+    </div>
+}
+
+@code{
+    bool login = true;
+    string email = "";
+    string username = "";
+    string password = "";
+
+    void change()
+    {
+        login = !login;
+    }
+
+    async Task loginNow()
+    {
+        Console.WriteLine("Login");
+        Console.WriteLine(await JSRuntime.InvokeAsync<string>("login", email, password));
+    }
+
+    async Task signupNow()
+    {
+        Console.WriteLine("Signup");
+    }
+}
