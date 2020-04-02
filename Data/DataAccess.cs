@@ -10,6 +10,7 @@ namespace CryptoBlazor.Data
     {
         private string ProjectId;
         private FirestoreDb DB;
+
         
         public DataAccess()
         {
