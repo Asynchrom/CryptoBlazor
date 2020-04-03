@@ -15,16 +15,16 @@
 <h1>LAST 50 DAYS - Cryptocurrency history price graph</h1>
 
 <div class="btn-group" role="group" aria-label="Basic example">
-    <button @onclick="@(() => GetChartData("bitcoinHistory"))" type="button" class="btn btn-primary mr-2">Bitcoin</button>
-    <button @onclick="@(() => GetChartData("ethereumHistory"))" type="button" class="btn btn-primary mr-2">Ethereum</button>
-    <button @onclick="@(() => GetChartData("tetherHistory"))" type="button" class="btn btn-primary mr-2">Tether</button>
-    <button @onclick="@(() => GetChartData("bitcoin-cashHistory"))" type="button" class="btn btn-primary mr-2">Bitcoin cash</button>
-    <button @onclick="@(() => GetChartData("bitcoin-svHistory"))" type="button" class="btn btn-primary mr-2">Bitcoin SV</button>
-    <button @onclick="@(() => GetChartData("litecoinHistory"))" type="button" class="btn btn-primary mr-2">Litecoin</button>
-    <button @onclick="@(() => GetChartData("eosHistory"))" type="button" class="btn btn-primary mr-2">EOS</button>
-    <button @onclick="@(() => GetChartData("binance-coinHistory"))" type="button" class="btn btn-primary mr-2">Binance coin</button>
-    <button @onclick="@(() => GetChartData("tezosHistory"))" type="button" class="btn btn-primary mr-2">Tezos</button>
-    <button @onclick="@(() => GetChartData("unus-sed-leoHistory"))" type="button" class="btn btn-primary mr-2">Unus sed leo</button>
+    <button @onclick="@(() => GetChartData("bitcoinHistory"))" type="button" class="btn btn-default mr-2">Bitcoin</button>
+    <button @onclick="@(() => GetChartData("ethereumHistory"))" type="button" class="btn btn-default mr-2">Ethereum</button>
+    <button @onclick="@(() => GetChartData("tetherHistory"))" type="button" class="btn btn-default mr-2">Tether</button>
+    <button @onclick="@(() => GetChartData("bitcoin-cashHistory"))" type="button" class="btn btn-default mr-2">Bitcoin cash</button>
+    <button @onclick="@(() => GetChartData("bitcoin-svHistory"))" type="button" class="btn btn-default mr-2">Bitcoin SV</button>
+    <button @onclick="@(() => GetChartData("litecoinHistory"))" type="button" class="btn btn-default mr-2">Litecoin</button>
+    <button @onclick="@(() => GetChartData("eosHistory"))" type="button" class="btn btn-default mr-2">EOS</button>
+    <button @onclick="@(() => GetChartData("binance-coinHistory"))" type="button" class="btn btn-default mr-2">Binance coin</button>
+    <button @onclick="@(() => GetChartData("tezosHistory"))" type="button" class="btn btn-default mr-2">Tezos</button>
+    <button @onclick="@(() => GetChartData("unus-sed-leoHistory"))" type="button" class="btn btn-default mr-2">Unus sed leo</button>
 </div>
 
 <ChartJsLineChart @ref="_lineChartJs" Config="@_lineConfig" Width="50" Height="20" />
@@ -143,3 +143,34 @@
         };
     }
 }
+
+<style>
+    .btn
+    {
+        background-color: #202020;
+        border: none;
+        color: white;
+    }
+    .btn:hover
+    {
+        background-color: #505050;
+        color: white;
+    }
+    .btn:active
+    {
+        background-color: #505050;
+        color: white;
+        box-shadow: none;
+    }
+    .btn:focus
+    {
+        color: white;
+        box-shadow: none;
+    }
+    .btn:hover:active:focus
+    {
+        background-color: #505050;
+        color: white;
+        box-shadow: none;
+    }
+</style>
