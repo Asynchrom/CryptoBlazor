@@ -8,19 +8,21 @@
 <h1 style="text-align: center;">Converter</h1>
 
 <div class="container" style="margin-top: 80px;">
-    <div class="row justify-content-center">
-            <div class="col-4">
-                <input type="number" style="width: 100%;" @bind="amount">
+    <div class="row">
+            <div class="offset-2 col-4">
+                <input type="number" style="width: 100%;border-radius: .25rem;border: 1px solid #ced4da;padding-left: 12px;padding-right: 12px;" @bind="amount">
             </div>
-            <div class="col-4"></div>
-        </div>
+            <div class="col-4">
+                <p style="width: 100%;padding:1px 12px 1px 12px;color: red;"><b>@total</b></p>
+            </div>
+    </div>
 </div>
 
 <div class="container" style="margin-top: 20px;">
-    <div class="row justify-content-center">
-        <div class="col-4">
+    <div class="row">
+        <div class="offset-2 col-4">
             <select class="form-control" @bind="coin">
-                <option selected disabled value="-1">Choose one coin</option>
+                <option selected disabled value="-1">Choose a coin</option>
                 <option value="bitcoinHistory Bitcoin (BTC)">Bitcoin (BTC)</option>
                 <option value="ethereumHistory Etherum (ETH)">Etherum (ETH)</option>
                 <option value="tetherHistory Tether (USDT)">Tether (USDT)</option>
@@ -35,7 +37,7 @@
         </div>
         <div class="col-4">
             <select class="form-control" @bind="currencyType">
-                <option selected disabled value="-1">Choose one currency</option>
+                <option selected disabled value="-1">Choose a currency</option>
                 <option value="USD">United States Dollar (USD)</option>
                 <option value="EUR">Euro (EUR)</option>
                 <option value="GBP">Great Britain Pound (GBP)</option>
@@ -46,30 +48,19 @@
 </div>
 
 <div class="container" style="margin-top: 20px;">
-    <div class="row justify-content-center">
-        <div class="col-1">
-            <button class="btn btn-primary" @onclick="@(() => GetCryptoData(coin))">
-                Convert!
+    <div class="row">
+        <div class="offset-4 col-2">
+            <button class="btn btn-default btn-block" @onclick="@(() => GetCryptoData(coin))">
+                Convert
             </button>
         </div>
-        <div class="col-1">
-            <button class="btn btn-primary" @onclick="@(() => Reload())">
-                Refresh!
+        <div class="col-2">
+            <button class="btn btn-default btn-block" @onclick="@(() => Reload())">
+                Refresh
             </button>
         </div>
     </div>
 </div>
-
-@if (prices != null)
-{
-    <div class="container" style="margin-top: 20px;">
-        <div class="row justify-content-center">
-            <div class="col-8">
-                <p>@amount @coinType: <b>@total @frontCurrencyType</b></p>
-            </div>
-        </div>
-    </div>
-}
 
 @code {
     string coin, currencyType, frontCurrencyType, coinType;
@@ -108,3 +99,33 @@
     }
 }
 
+<style>
+    .btn
+    {
+        background-color: #202020;
+        border: none;
+        color: white;
+    }
+    .btn:hover
+    {
+        background-color: #505050;
+        color: white;
+    }
+    .btn:active
+    {
+        background-color: #505050;
+        color: white;
+        box-shadow: none;
+    }
+    .btn:focus
+    {
+        color: white;
+        box-shadow: none;
+    }
+    .btn:hover:active:focus
+    {
+        background-color: #505050;
+        color: white;
+        box-shadow: none;
+    }
+</style>

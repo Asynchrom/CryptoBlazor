@@ -10,19 +10,19 @@
             <!-- Tabs Titles -->
             <!-- Icon -->
             <div class="fadeIn first">
-                <br />Login
+                <br /><h1>Login</h1>
             </div>
 
             <!-- Login Form -->
             <form>
                 <input @bind-value="username" type="text" id="login" class="fadeIn second" name="login" placeholder="username">
                 <input @bind-value="password" type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-                <input @onclick="loginNow" type="submit" class="fadeIn fourth" value="Log In">
+                <input @onclick="loginNow" type="submit" class="fadeIn fourth " value="Log In">
             </form>
 
             <!-- Change -->
             <div id="formFooter">
-                <a class="underlineHover" href="#" @onclick="change">Don't have an account?</a>
+                <a class="black-options-text" href="#" @onclick="change">Don't have an account?</a>
             </div>
 
         </div>
@@ -35,7 +35,7 @@ else
             <!-- Tabs Titles -->
             <!-- Icon -->
             <div class="fadeIn first">
-                <br />Singup
+                <br /><h1>Signup</h1>
             </div>
 
             <!-- Signup Form -->
@@ -47,8 +47,8 @@ else
             </form>
 
             <!-- Change -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#" @onclick="change">Already have an account?</a>
+            <div id="formFooter" style="background-color: #A9A9A9;">
+                <a class="black-options-text" href="#" @onclick="change">Already have an account?</a>
             </div>
 
         </div>
@@ -77,3 +77,86 @@ else
         Console.WriteLine("Signup");
     }
 }
+
+<style>
+    #formContent
+    {
+        background-color: #F8F8F8;
+    }
+    #formFooter
+    {
+        background-color: #A9A9A9;
+    }
+    .black-options-text 
+    {
+        color: black;
+    }
+    .black-options-text:link {
+        color: black;
+    }
+    .black-options-text:visited {
+        color: black;
+    }
+    .black-options-text:hover {
+        color: black;
+    }
+    .black-options-text:active {
+        color: black;
+    }
+    input[type=submit] 
+    {
+        background-color: #202020;
+        border: none;
+        color: white;
+        box-shadow: none;
+    }
+    input[type=submit]:hover
+    {
+        background-color: #505050;
+        color: white;
+    }
+    input[type=submit]:active
+    {
+        background-color: #505050;
+        color: white;
+        box-shadow: none;
+    }
+    input[type=submit]:focus
+    {
+        color: white;
+        box-shadow: none;
+    }
+    input[type=submit]:hover:active:focus
+    {
+        background-color: #505050;
+        color: white;
+        box-shadow: none;
+    }
+    input[type=text] 
+    {
+        background-color: #F0F0F0;
+        border: none;
+        box-shadow: none;
+    }
+    input[type=text]:hover
+    {
+        background-color: #F0F0F0;
+    }
+    input[type=text]:active
+    {
+        background-color: #F0F0F0;
+        box-shadow: none;
+    }
+    input[type=text]:focus
+    {
+        background-color: #F0F0F0;
+        box-shadow: none;
+        border: none;
+    }
+    input[type=text]:hover:active:focus
+    {
+        background-color: #F0F0F0;
+        box-shadow: none;
+        border: none;
+    }
+</style>
